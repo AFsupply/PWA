@@ -1,6 +1,6 @@
 {
-  "appId": "com.autonom-food-supply",
-  "appName": "foodApp",
+  "appId": "com.afsupply-a2af5",
+  "appName": "AFS",
   "bundledWebRuntime": false,
   "webDir": "www",
   "server": {

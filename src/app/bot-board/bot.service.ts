@@ -90,7 +90,7 @@ export class BotService {
   addBot(bot: Bot) {
     this.authService.token.pipe(take(1), switchMap( token => {
       if (this.storageMode === 'firebase' ) {
-      return this.http.put(`https://autonomfoodsupply.firebaseio.com/bots.json?auth=${token}`, {...bot, id: null })
+      return this.http.put(`https://afsupply-a2af5.firebaseio.com/bots.json?auth=${token}`, {...bot, id: null })
         .pipe(tap( resData => {
         console.log(resData);
       }));
@@ -146,7 +146,7 @@ export class BotService {
       console.log('coucou');
       if (this.storageMode === 'firebase') {
         console.log(token)
-        return this.http.get<{[key: string]: BotFirebaseData}>(`https://autonomfoodsupply.firebaseio.com/bots.json?auth=${token}`)
+        return this.http.get<{[key: string]: BotFirebaseData}>(`https://afsupply-a2af5.firebaseio.com/bots.json?auth=${token}`)
         .pipe(map(
           (loadedBot) => {
             const bots = [];
@@ -223,7 +223,7 @@ export class BotService {
     return this.authService.token.pipe(take(1), switchMap( token => {
       if (this.storageMode === 'firebase' ) {
       return this.http.post<{name: string}>(
-        `https://autonomfoodsupply.firebaseio.com/bots.json?auth=${token}`,
+        `https://afsupply-a2af5.firebaseio.com/bots.json?auth=${token}`,
         {...bot, id: null })
           .pipe(tap( resData => {
         console.log(resData);
@@ -238,7 +238,7 @@ export class BotService {
     uploadData.append('image', image);
 
     return this.http.post<{imageUrl: string, imagePath: string}>(
-      'https://us-central1-autonomfoodsupply.cloudfunctions.net/storeImage',
+      'https://us-central1-afsupply-a2af5.cloudfunctions.net/storeImage',
       uploadData
     );
   }

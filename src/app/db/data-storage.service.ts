@@ -13,9 +13,11 @@ import { Bot } from '../bot-board/bot.model';
 
 
 
-@Injectable({
-  providedIn: 'root'
-})
+ @Injectable({
+   providedIn: 'root'
+  })
+
+
 export class DataStorageService {
 
   constructor(private http: HttpClient,
@@ -24,8 +26,7 @@ export class DataStorageService {
               private homeSlideService: HomeSlideService,
               ) { }
 
-  storageMode: string;
-  strorageMode = 'firebase';
+  storageMode = 'firebase';
 
 /*   storeVegetables() {
     return this.http.put('https://techsc-14294.firebaseio.com/articles.json', this.vegetableService.getVegetables());
@@ -69,12 +70,12 @@ export class DataStorageService {
 
   storeHomeSlides() {
     if (this.storageMode === 'firebase' ) {
-      return this.http.put('https://autonomfoodsupply.firebaseio.com/homeSlides.json', this.homeSlideService.getHomeSlides());
+      return this.http.put('https://afsupply-a2af5.firebaseio.com/homeSlides.json', this.homeSlideService.getHomeSlides());
     }
   }
 
   getHomeSlides() {
-    this.http.get<HomeSlide[]>('https://autonomfoodsupply.firebaseio.com/homeSlides.json')
+    this.http.get<HomeSlide[]>('https://afsupply-a2af5.firebaseio.com/homeSlides.json')
       .pipe(map(
         (homeSlides) => {
           return homeSlides;
@@ -91,7 +92,7 @@ export class DataStorageService {
 
   storeBot(bot: Bot) {
     if (this.storageMode === 'firebase' ) {
-      return this.http.put('https://autonomfoodsupply.firebaseio.com/bots.json', {...bot, id: null }).pipe(tap( resData => {
+      return this.http.put('https://afsupply-a2af5.firebaseio.com/bots.json', {...bot, id: null }).pipe(tap( resData => {
         console.log(resData);
       }));
     }
