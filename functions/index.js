@@ -10,12 +10,13 @@ const fbAdmin = require('firebase-admin')
 const { Storage } = require('@google-cloud/storage');
 
 const storage = new Storage({
-  projectId: 'autonomfoodsupply'
+  projectId: 'afsupply-a2af5'
 });
 
 fbAdmin.initializeApp({
-  credential: fbAdmin.credential.cert(require('./autonomfoodsupply-firebase-adminsdk.json')),
-  databaseURL: "https://autonomfoodsupply.firebaseio.com"
+  credential: fbAdmin.credential.cert(require('./afsupply-a2af5-firebase-adminsdk-saz6m-d56971a310.json')),
+  databaseURL: "https://afsupply-a2af5.firebaseio.com"
+
 })
 
 exports.storeImage = functions.https.onRequest((req, res) => {
@@ -58,7 +59,7 @@ exports.storeImage = functions.https.onRequest((req, res) => {
       return fbAdmin.auth().verifyIdToken(idToken).then(decodedToken => {
         console.log(uploadData.type);
         return storage
-          .bucket('autonomfoodsupply.appspot.com')
+          .bucket('afsupply-a2af5.appspot.com')
           .upload(
             uploadData.filePath, {
               uploadType: 'media',
@@ -75,7 +76,7 @@ exports.storeImage = functions.https.onRequest((req, res) => {
           return res.status(201).json({
             imageUrl:
               'https://firebasestorage.googleapis.com/v0/b/' +
-              storage.bucket('autonomfoodsupply.appspot.com').name +
+              storage.bucket('afsupply-a2af5.appspot.com').name +
               '/o/' +
               encodeURIComponent(imagePath) +
               '?alt=media&token=' +
