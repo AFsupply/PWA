@@ -1,0 +1,42 @@
+<ion-card style = "border-radius:30px !important" class="card-signup">
+  <ion-card-header>
+    <ion-card-title>Inscription</ion-card-title>
+    <ion-card-subtitle>Inscrivez vous pour créer votre interface personnel</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content style = "border-radius:30px !important">
+    <form [formGroup]="signUpForm" (ngSubmit)='onSignUp()'>
+      <ion-item  class="emailSignup">
+        <ion-label id="emailLabel" position="stacked" no-margin>Enter your email</ion-label>
+        <ion-row style="height:10px"></ion-row>
+          <ion-input type="email"
+               placeholder="johndo@gmail.com"
+               pattern="email" 
+               autocomplete="on" 
+               clear-input=true 
+               formControlName="email">
+          </ion-input>
+      </ion-item>
+      <ion-row style="height:20px"></ion-row>
+      <ion-item class="passwordSignup">
+        <ion-label position="stacked" no-margin>Enter your email</ion-label>
+        <ion-row style="height:10px"></ion-row>
+        <ion-input type="email"
+               placeholder="johndo@gmail.com"
+               pattern="email" 
+               autocomplete="on" 
+               clear-input=true 
+               formControlName="password">
+        </ion-input>
+      </ion-item>
+      <ion-row style="height:20px"></ion-row>
+      <ion-button type="submit" color="favorite">OK</ion-button>
+      <ion-button type="submit" color="warning">CANCEL</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
+
+
+  
+
+
+

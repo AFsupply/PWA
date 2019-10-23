@@ -1,0 +1,26 @@
+<ion-fab vertical="center" horizontal="end" slot="fixed"> 
+
+  <ion-fab-button size="small" color="light">
+    <ion-icon name="logo-android" size="large"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-list side="top">
+    <ion-label>Carte avec robots</ion-label>
+    <ion-fab-button size="small" color="light" (click)="onClick()">
+      <ion-icon name="map" size="large"></ion-icon>
+    </ion-fab-button>
+    <ion-label>Scanner</ion-label>
+    <ion-fab-button size="small" color="light" (click)="onClick()">
+      <ion-icon name="wifi" size="large"></ion-icon>
+    </ion-fab-button>
+    <ion-label>Ajouter un robot</ion-label>
+    <ion-fab-button size="small" color="light" (click)="onNewBot()">
+      <ion-icon name="add-circle" size="large"></ion-icon>
+    </ion-fab-button>
+    <ion-label>Supprimer un robot</ion-label>
+    <ion-fab-button size="small" color="light" (click)="onClick()">
+      <ion-icon name="remove-circle" size="large"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+
+</ion-fab>

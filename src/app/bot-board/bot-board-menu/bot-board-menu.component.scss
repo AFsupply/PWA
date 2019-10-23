@@ -1,0 +1,24 @@
+ion-fab-list {
+    ion-label {
+        position: relative !important;
+        right: 150px !important;
+        color: white !important;
+        border-radius:30px !important;
+        background-color: var(--ion-color-primary) !important; 
+        padding: 4px 0px !important;
+        text-align: center !important;
+        align-items: center !important;
+        width: 175px !important;
+        top: -2px !important;
+    }
+  }
+  
+  ion-fab-list {
+    ion-fab-button {
+        position: relative !important;
+        bottom: -10px !important; 
+        margin-bottom : -20px !important;
+        right: 57px !important;
+        height: 40px !important;
+    }
+  }

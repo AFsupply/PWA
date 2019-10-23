@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+     Bibliothéque de robot
+    </ion-title>
+  </ion-toolbar>
+  <app-auth-fab></app-auth-fab>
+</ion-header>
+
+<ion-content> 
+  <app-bot-list></app-bot-list>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="this.router.url == '/bot-board'">
+    <ion-fab-button size="small">
+      <ion-icon name="arrow-round-back" color="dark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <!-- <ion-button padding float-right>
+    <ion-icon name="arrow-round-back"></ion-icon>
+  </ion-button> -->
+  <div *ngIf="this.router.url !== '/bot-board'">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+      
+  </ion-toolbar>
+  <app-bot-board-menu></app-bot-board-menu>
+</ion-footer>
+

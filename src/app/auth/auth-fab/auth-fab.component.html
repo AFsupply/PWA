@@ -1,0 +1,38 @@
+<ion-fab vertical="center" horizontal="end" slot="fixed"> 
+
+    <ion-fab-button size="small" color="light">
+      <ion-icon name="person" size="large"></ion-icon>
+    </ion-fab-button>
+  
+    <ion-fab-list side="bottom">
+  
+      <ng-template [ngIf]="!isAuthenticatedAuhtComp">
+      <ion-label color="primary">Inscription</ion-label>      
+      <ion-fab-button (click)="presentSignUpPopover()">
+        <ion-icon name="list-box" size="large"></ion-icon>
+      </ion-fab-button>
+      </ng-template>
+
+      <!-- <ng-template [ngIf] = "authService.isAuthenticated()"> -->
+        <ion-label id="deco" color="primary">Menu</ion-label>
+        <ion-fab-button size="small" color="light" (click)="openUserMenu()">
+          <ion-icon name="menu" size="large"></ion-icon>
+        </ion-fab-button>
+      <!-- </ng-template> -->
+  
+      <ng-template [ngIf] = "isAuthenticatedAuhtComp">
+      <ion-label id="deco" color="primary">Deconnexion</ion-label>
+      <ion-fab-button size="small" color="light" (click)="onLogOut()">
+        <ion-icon name="walk" size="large"></ion-icon>
+      </ion-fab-button>
+      </ng-template>
+  
+      <ng-template [ngIf]="!isAuthenticatedAuhtComp">
+      <ion-label color="primary">Connexion</ion-label>
+      <ion-fab-button size="small" color="light" (click)="presentSignInPopover()">
+        <ion-icon name="person" size="large"></ion-icon>
+      </ion-fab-button>
+      </ng-template>
+    </ion-fab-list>
+  
+</ion-fab>

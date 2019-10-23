@@ -1,0 +1,27 @@
+.picker {
+    width: 30rem;
+    max-width: 80%;
+    height: 20rem;
+    max-height: 60vh;
+    border: 1px solid var(--ion-color-light);
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--ion-color-light);
+    border-radius: 200px
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+input[type='file'] {
+    display: none;
+}
+
+.div{
+  background-color: var(--ion-color-light)
+}

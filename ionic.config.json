@@ -1,0 +1,9 @@
+{
+  "name": "foodApp",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "717d5869"
+}

@@ -1,0 +1,104 @@
+<ion-header no-padding>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Autonom Food Supply
+    </ion-title>
+  </ion-toolbar>
+    <app-auth-fab></app-auth-fab>
+</ion-header>
+
+<ion-content>
+  <app-home-slide #timer></app-home-slide>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-grid no-padding>
+      <ion-row no-padding>
+        <ion-col no-padding size="6">
+          <ion-button (click)="timer.category = 'presentation'" color="light" float-right no-margin>
+          <ion-icon name="hand" size="large"></ion-icon>
+        </ion-button>
+        </ion-col>
+        <ion-col size="6" no-padding>
+          <ion-button (click)="timer.category = 'fabrication'" color="light" no-margin>
+          <ion-icon name="hammer" size="large"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+
+
+<!-- <ion-content>
+  <ion-slides [options] = "sliderConfiguration">
+      <ion-slide>
+        <ion-col>
+            <ion-card style = "border-radius:30px !important"> 
+                <ion-card-header>
+                  <ion-card-title text-left>Qu'est ce que c'est</ion-card-title>
+                </ion-card-header>
+                <ion-card-content text-justify>
+                  Autonome Food Supply est un ensemble d'outils de machines servant à produire de la nourriture. 
+                  Il est conçu avec des outils open source et est lui même open-source pour que
+                  vous puissiez le fabriquer vous même. Cependant, si vous n'avez pas le temps ou 
+                  le materiel de fabrication nécessaire, nous pouvons vous fournir un kit de démarrage.
+                  Toutefois, Autonome Food Supply est conçu pour être modulable afin de s'adapter
+                  à un maximun d'espace de culture et de variétés cultivables. Cela pour correspondre au mieux à vos besoins. 
+                </ion-card-content>
+                <ion-card style = "border-radius:30px !important">
+                <ion-card-content>
+                    <ion-icon name="menu"></ion-icon>
+                    <ion-icon name="menu"></ion-icon>
+                </ion-card-content>
+                </ion-card>
+                <ion-card-content text-justify> 
+                    Cette application va vous permettre d'installer Autonome Food Supply étape par étape
+                    ainsi qu'à manager votre production. Mais manager une production n'est pas très
+                    amusant ! C'est pourquoi, Autonome Food Supply va plus loin et vous propose de gérer directement vos 
+                    besoins. Vous allez donc via cette application passer des commandes de légumes que vous aurez choisi, accompagné de la date  
+                    à laquelle vous souhaitez obtenir le produit. Autonome Food Supply s'occupera des semis au moment propice ainsi que de
+                    l'arrosage et la recolte des plantations.
+                  </ion-card-content>
+                  <ion-card style = "border-radius:30px !important"> 
+                      <ion-card-content>
+                        <ion-icon name="menu"></ion-icon>
+                        <ion-icon name="menu"></ion-icon>
+                        <ion-icon name="menu"></ion-icon>
+                      </ion-card-content>
+                  </ion-card>
+            </ion-card>
+        </ion-col> 
+      </ion-slide>
+      <ion-slide>
+        <ion-col>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title text-left>Qu'est ce que c'est</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+              Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+              Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+              Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+              Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+              Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+              Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+              Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+            </ion-card-content>
+          </ion-card>
+        </ion-col> 
+      </ion-slide>
+  </ion-slides>
+</ion-content> -->
+
+

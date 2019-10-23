@@ -1,0 +1,616 @@
+<ion-content scroll="true">
+  <ion-card style = "border-radius:30px !important" class="card-signup">
+  <ion-card-header>
+    <ion-card-title>Votre robot</ion-card-title>
+  </ion-card-header>
+  <ion-card-content style = "border-radius:30px !important">
+    <form [formGroup]="botForm">
+      <ion-row style="height:20px"></ion-row>
+      <ion-card style="border-radius:30px" id="addFunctionCard">
+        <ion-card-header color="secondary">
+          <ion-card-title>Son identification</ion-card-title>
+        </ion-card-header>
+        <ion-card-content id="subForm">
+          <ion-row style="height:20px"></ion-row>
+          <ion-item  class="nameBot" color="light">
+            <ion-label position="stacked" no-margin>Nom</ion-label>
+            <ion-input type="text"
+                       placeholder="Jardinier"
+                       autocomplete="on" 
+                       clear-input="true"
+                       formControlName="name">
+            </ion-input>
+          </ion-item>
+          <ion-row style="height:20px"></ion-row>
+          <ion-item class="ipBot" color="light">
+            <ion-label position="stacked" no-margin>Adresse web</ion-label>
+            <ion-input type="email"
+                       placeholder="192.168.1.1" 
+                       autocomplete="on" 
+                       clear-input=true 
+                       formControlName="webAdress">
+            </ion-input>
+          </ion-item>
+          <ion-row style="height:20px"></ion-row>
+          <ion-item class="imageBot" color="light">
+              <ion-label position="stacked" style="margin-bottom: 10px">Image</ion-label>
+            <ion-row style="padding-top: 5px">
+              <ion-item color="light" lines="none"> 
+              <app-image-picker 
+              (imagePick)="(onImagePicked($event, ''))"
+              [showPreview]="botForm.get('image').value"
+              ></app-image-picker></ion-item>
+            </ion-row>
+            <ion-row>
+              <ion-button color="primary" size="small" (click)="uploadImage(botForm.get('image').value)" [disabled]="this.botForm.get('image').invalid">Upload</ion-button>
+            </ion-row>
+          </ion-item>
+          <ion-row style="height:20px"></ion-row>
+          <ion-item class="descriptionBot" color="light">
+            <ion-label position="stacked" no-margin>Description</ion-label>
+            <ion-row style="height:10px"></ion-row>
+            <ion-textarea placeholder="Ce robot sctocke les graines ainsi que les pots et le terreau. Il s'occupe de planter les graines et mettre à disposition les pots.  " 
+                          autocomplete="on" 
+                          clear-input=true 
+                          formControlName="description">
+            </ion-textarea>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <ion-row style="height:10px"></ion-row>
+      <ion-card style="border-radius:30px" id="addFunctionCard">
+        <ion-card-header color="secondary">
+          <ion-card-title>Sa localisation</ion-card-title>
+        </ion-card-header>
+        <ion-card-content id="subForm">
+          <ion-row style="height:20px"></ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item class="locationLatBot" color="light">
+                <ion-label position="stacked" no-margin>Latitude</ion-label>
+                <ion-input type="text"
+                           placeholder="34.15" 
+                           autocomplete="on"
+                           formControlName="locationLat">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item color="light">
+                <ion-label position="stacked" no-margin>Longitude</ion-label>
+                <ion-input type="text"
+                           placeholder="-04.15" 
+                           autocomplete="on" 
+                           formControlName="locationLng">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row style="height:10px"></ion-row>
+          <ion-item color="light">
+            <ion-label position="stacked" no-margin>Enter l'adresse du robot</ion-label>
+            <ion-input type="text"
+                       placeholder="36 rue Charles Fleury 68900 PIERRE-SUR-RHONE" 
+                       autocomplete="on" 
+                       clear-input=true 
+                       formControlName="adress">
+            </ion-input>
+          </ion-item>
+          <ion-row style="height:10px"></ion-row>
+          <ion-row id="askLocalisationRow">
+            <ion-item lines="none">
+              <ion-button (click)="onGetLocation()">
+                <ion-icon slot="start" name="pin"></ion-icon>
+                <ion-label style="background-color: var(--ion-color-primary)">Utliser ma position GPS</ion-label>
+              </ion-button>
+            </ion-item>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-row style="height:10px"></ion-row>
+      
+      <!-- WHEN LARGE SCREEN
+        <ion-row *ngFor="let use of getControls() let i = index"
+               [formGroupName]="i">
+      <ion-col size="3">
+        <ion-item class="useNameBot">
+          <ion-label position="stacked" no-margin>Enter le nom de la fonction</ion-label>
+          <ion-row style="height:10px"></ion-row>
+          <ion-input type="text"
+                     placeholder="Go Home" 
+                     autocomplete="on" 
+                     clear-input=true 
+                     formControlName="name">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item class="useDescriptionBot">
+          <ion-label position="stacked" no-margin>Enter l'utilité de la fonction</ion-label>
+          <ion-row style="height:10px"></ion-row>
+          <ion-input type="text"
+                     placeholder="Retour au point de charge" 
+                     autocomplete="on" 
+                     clear-input=true 
+                     formControlName="description">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item class="useArgumentBot">
+          <ion-label position="stacked" no-margin>Enter les arguments de la fonction</ion-label>
+          <ion-row style="height:10px"></ion-row>
+          <ion-input type="text"
+                     placeholder="Retour au point de charge" 
+                     autocomplete="on" 
+                     clear-input=true 
+                     formControlName="argument">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item>
+          <ion-button (click)="onDeleteFunction()">
+            Supprimer une fonction
+          </ion-button>
+        </ion-item>
+      </ion-col>
+      </ion-row> -->
+      <!-- <ion-row>
+        <ion-item formArrayName="uses" id="uses">
+          <ion-label>Fonctions du robot</ion-label>
+        </ion-item>
+        <ion-row *ngFor="let useCtrl of uses.controls; let i = index;"
+               [formGroupName]="i">
+      <ion-col size="12">
+        <ion-item class="useNameBot">
+          <ion-label position="stacked" no-margin>Enter le nom de la fonction</ion-label>
+          <ion-row style="height:10px"></ion-row>
+          <ion-input type="text"
+                     placeholder="Go Home" 
+                     autocomplete="on" 
+                     clear-input=true 
+                     formControlName="titre">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="useDescriptionBot">
+          <ion-label position="stacked" no-margin>Enter l'utilité de la fonction</ion-label>
+          <ion-row style="height:10px"></ion-row>
+          <ion-input type="text"
+                     placeholder="Retour au point de charge" 
+                     autocomplete="on" 
+                     clear-input=true
+                     class="form-control"
+                     formControlName="description">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="useArgumentBot">
+          <ion-label position="stacked" no-margin>Enter les arguments de la fonction</ion-label>
+          <ion-row style="height:10px"></ion-row>
+          <ion-input type="text"
+                     placeholder="Retour au point de charge" 
+                     autocomplete="on" 
+                     clear-input=true
+                     class="form-control"
+                     formControlName="argument">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-button (click)="onDeleteFunction()">
+            Supprimer la fonction
+          </ion-button>
+        </ion-item>
+      </ion-col>
+      </ion-row>
+      </ion-row>
+      
+      <ion-item color="secondary" lines="none">
+        <ion-button (click)="onAddFunction()" slot="end" id="addFunction">
+          <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+        </ion-button>
+      </ion-item> -->
+      <ion-card style="border-radius:30px" id="addFunctionCard">
+        <ion-card-header color="secondary">
+          <ion-card-title>Ses Fonctions</ion-card-title>
+        </ion-card-header>
+        <ion-card-content id="subForm">
+          <ion-row style="height:10px"></ion-row>
+          <div formArrayName="uses" 
+               id="uses"
+               class="form-group">
+            <div *ngFor="let useCtrl of getUsesControls() let iU = index"
+               [formGroupName]="iU">
+              <ion-card style="border-radius:30px" id="functionGCard">
+                <ion-card-header color="secondary">
+                  <ion-card-title>Fonction {{iU}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content style="border-radius: 30px" id="subSubForm">
+                  <ion-row style="height:10px"></ion-row>
+                  <ion-card style="border-radius:30px" id="functionIdCard">
+                    <ion-card-header color="secondary">
+                      <ion-card-title>Identification</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content id="subUsesForm">
+                      <ion-row style="height:20px"></ion-row>
+                      <ion-item color="light">
+                        <ion-label position="stacked" no-margin>Nom</ion-label>
+                        <ion-input type="text"
+                                   placeholder="sowBot" 
+                                   autocomplete="on" 
+                                   clear-input=true
+                                   class="form-control"
+                                   formControlName="name">
+                        </ion-input>
+                      </ion-item>
+                      <ion-row style="height:20px"></ion-row>
+                      <ion-item class="useDescriptionBot" color="light">
+                        <ion-label position="stacked" no-margin>Utilité</ion-label>
+                        <ion-input type="text"
+                                   placeholder="Retour au point de charge" 
+                                   autocomplete="on" 
+                                   clear-input=true
+                                   class="form-control"
+                                   formControlName="description">
+                        </ion-input>
+                      </ion-item>
+                    </ion-card-content>
+                  </ion-card>
+                  <ion-row style="height:10px"></ion-row>
+                  <ion-card style="border-radius:30px" id="addArgumentsCard">
+                    <ion-card-header color="secondary">
+                      <ion-card-subtitle>Arguments</ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-card-content id="subUsesForm">
+                      <ion-row style="height:20px"></ion-row>
+                      <div formArrayName="arguments">
+                        <div *ngFor='let argument of getUseArgumentsControls(iU); let iUA = index'
+                             [formGroupName]="iUA">
+                          <ion-item color="light">
+                            <ion-label position="stacked" no-margin>Nom</ion-label>
+                            <ion-input type="text" 
+                                       placeholder="Z"
+                                       autocomplete="on" 
+                                       clear-input=true
+                                       class="form-control"
+                                       formControlName="name">
+                            </ion-input> 
+                          </ion-item>
+                          <ion-row id="deleteFunctionRow">
+                            <ion-item>
+                              <ion-button (click)="onDeleteArgumentUse(iU)">
+                                <ion-icon slot="start" name="remove-circle"></ion-icon>
+                                <ion-label style="background-color: var(--ion-color-primary)">Supprimer</ion-label>
+                              </ion-button>
+                            </ion-item>
+                          </ion-row>
+                          <ion-row style="height:10px"></ion-row>
+                        </div>
+                        <ion-row id="addArgumentRow">
+                          <ion-item lines="none">
+                            <ion-button (click)="onAddArgument(iU)">
+                              <ion-icon slot="start" name="add-circle"></ion-icon>
+                              <ion-label style="background-color: var(--ion-color-primary)">Ajouter</ion-label>
+                            </ion-button>
+                          </ion-item>
+                        </ion-row>
+                      </div>
+                    </ion-card-content>
+                  </ion-card>
+                  <ion-row id="deleteFunctionRow">
+                    <ion-item color="light" lines="none">
+                      <ion-button (click)="onDeleteUse()">
+                        <ion-icon slot="start" name="remove-circle"></ion-icon>
+                        <ion-label style="background-color: var(--ion-color-primary)">Supprimer</ion-label>
+                      </ion-button>
+                    </ion-item>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </div>
+          <ion-row id="addFunctionRow">
+            <ion-item color="tertiary" lines="none" no-padding>
+              <ion-button (click)="onAskUse('')" slot="end" id="askFunctionButton" [disabled]="this.botForm.get('webAdress').invalid">
+                <ion-icon slot="start" name="wifi"></ion-icon>
+                <ion-label style="background-color: var(--ion-color-primary)">Demander au robot</ion-label>
+              </ion-button>
+            </ion-item>
+            <ion-item color="tertiary" lines="none" no-padding>
+              <ion-button (click)="onAddUse()" slot="end" id="addFunctionButton">
+                <ion-icon slot="start" name="add-circle"></ion-icon>
+                <ion-label style="background-color: var(--ion-color-primary)">Ajouter</ion-label>
+              </ion-button>
+            </ion-item>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-row style="height:10px"></ion-row>
+      <ion-card style="border-radius:30px" id="addSlaveBotsCard">
+        <ion-card-header color="secondary">
+          <ion-card-title>Ses robot(s) connecté(s)</ion-card-title>
+        </ion-card-header>
+        <ion-card-content id="subForm">
+          <ion-row style="height:10px"></ion-row>
+          <div formArrayName= "slaveBots" 
+               id="slaveBots"
+               class="form-group">
+            <div  *ngFor="let slaveBotCtrl of getSlaveBotsControls() let iSB = index" 
+              formGroupName="{{iSB}}">
+              <ion-card style="border-radius:30px" id="slaveBotCard">
+                <ion-card-header color="secondary">
+                  <ion-card-title>Robot {{iSB}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content id="subSubForm">
+                  <ion-row style="height:10px"></ion-row>
+                  <ion-card style="border-radius:30px" id="addIdentificationCard">
+                    <ion-card-header color="secondary">
+                      <ion-card-title>Son Identification</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content id="subIdentificationForm">
+                      <ion-row style="height:20px"></ion-row>
+                      <ion-item  class="nameSlaveBot" color="light">
+                        <ion-label position="stacked" no-margin>Nom</ion-label>
+                        <ion-input type="text"
+                                   placeholder="Jardinier"
+                                   autocomplete="on" 
+                                   clear-input="true"
+                                   formControlName="name">
+                        </ion-input>
+                      </ion-item>
+                      <ion-row style="height:20px"></ion-row>
+                      <ion-item class="imageSlaveBot" color="light">
+                          <ion-label position="stacked" no-margin>Image</ion-label>
+                        <ion-row style="padding-top: 5px">
+                          <ion-item color="light" lines="none"> 
+                          <app-image-picker 
+                          (imagePick)="(onImagePicked($event, iSB))"
+                          [showPreview]="(this.botForm.controls['slaveBots']).at(iSB).get('image').value"
+                          ></app-image-picker></ion-item>
+                        </ion-row>
+                        <ion-row>
+                          <ion-button color="primary" size="small" (click)="uploadImage((this.botForm.controls['slaveBots']).at(iSB).get('image').value, iSB)" [disabled]="this.botForm.get('slaveBots')['controls'][iSB].controls.image.invalid">Upload</ion-button>
+                        </ion-row>
+                      </ion-item>
+                      <ion-row style="height:20px"></ion-row>
+                      <ion-item class="ipSlaveBot" color="light">
+                        <ion-label position="stacked" no-margin>Adresse web</ion-label>
+                        <ion-input type="email"
+                                   placeholder="192.168.1.1" 
+                                   autocomplete="on" 
+                                   clear-input=true 
+                                   formControlName="webAdress">
+                        </ion-input>
+                      </ion-item>
+                      <ion-row style="height:20px"></ion-row>
+                      <ion-item class="descriptionSlaveBot" color="light">
+                        <ion-label position="stacked" no-margin>Description</ion-label>
+                        <ion-row style="height:10px"></ion-row>
+                        <ion-textarea placeholder="Ce robot sctocke les graines ainsi que les pots et le terreau. Il s'occupe de planter les graines et mettre à disposition les pots.  " 
+                                      autocomplete="on" 
+                                      clear-input=true 
+                                      formControlName="description">
+                        </ion-textarea>
+                       <!--  <p>{{botForm.get('slaveBots')[0].webAdress | json}}</p> -->
+                      </ion-item>
+                    </ion-card-content>
+                  </ion-card>
+                  <ion-row style="height:10px"></ion-row>
+                  <ion-card style="border-radius:30px" id="addSlaveBotUsesCard">
+                    <ion-card-header color="secondary">
+                      <ion-card-title>Ses fonction</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content id="subForm">
+                        <ion-row style="height:10px"></ion-row>
+                        <div formArrayName="slaveBotUses" 
+                             id="uses"
+                             class="form-group">
+                          <div *ngFor="let useCtrl of getSlaveBotUsesControls(iSB) let iSBU = index"
+                             [formGroupName]="iSBU">
+                            <ion-card style="border-radius:30px" id="slaveBotfunctionGCard">
+                              <ion-card-header color="secondary">
+                                <ion-card-title>Fonction {{iSBU}}</ion-card-title>
+                              </ion-card-header>
+                              <ion-card-content style="border-radius: 30px" id="subSubForm">
+                                <ion-row style="height:10px"></ion-row>
+                                <ion-card style="border-radius:30px" id="functionIdCard">
+                                  <ion-card-header color="secondary">
+                                    <ion-card-title>Identification</ion-card-title>
+                                  </ion-card-header>
+                                  <ion-card-content id="subUsesForm">
+                                    <ion-row style="height:20px"></ion-row>
+                                    <ion-item color="light">
+                                      <ion-label position="stacked" no-margin>Nom</ion-label>
+                                      <ion-input type="text"
+                                                 placeholder="sowBot" 
+                                                 autocomplete="on" 
+                                                 clear-input=true
+                                                 class="form-control"
+                                                 formControlName="name">
+                                      </ion-input>
+                                    </ion-item>
+                                    <ion-row style="height:20px"></ion-row>
+                                    <ion-item class="useDescriptionBot" color="light">
+                                      <ion-label position="stacked" no-margin>Utilité</ion-label>
+                                      <ion-input type="text"
+                                                 placeholder="Retour au point de charge" 
+                                                 autocomplete="on" 
+                                                 clear-input=true
+                                                 class="form-control"
+                                                 formControlName="description">
+                                      </ion-input>
+                                    </ion-item>
+                                  </ion-card-content>
+                                </ion-card>
+                                <ion-row style="height:10px"></ion-row>
+                                <ion-card style="border-radius:30px" id="addArgumentsCard">
+                                  <ion-card-header color="secondary">
+                                    <ion-card-subtitle>Arguments</ion-card-subtitle>
+                                  </ion-card-header>
+                                  <ion-card-content id="subUsesForm">
+                                    <ion-row style="height:20px"></ion-row>
+                                    <div formArrayName="slaveBotUseArguments">
+                                      <div *ngFor='let argument of getSlaveBotUseArgumentsControls(iSB, iSBU); let iSBUA = index'
+                                           [formGroupName]="iSBUA">
+                                        <ion-item color="light">
+                                          <ion-label position="stacked" no-margin>Nom</ion-label>
+                                          <ion-input type="text" 
+                                                     placeholder="Z"
+                                                     autocomplete="on" 
+                                                     clear-input=true
+                                                     class="form-control"
+                                                     formControlName="name">
+                                          </ion-input> 
+                                        </ion-item>
+                                        <ion-row id="deleteFunctionRow">
+                                          <ion-item>
+                                            <ion-button (click)="onDeleteSlaveBotUseArgument(iSB, iSBU, iSBUA)">
+                                              <ion-icon slot="start" name="remove-circle"></ion-icon>
+                                              <ion-label style="background-color: var(--ion-color-primary)">Supprimer</ion-label>
+                                            </ion-button>
+                                          </ion-item>
+                                        </ion-row>
+                                        <ion-row style="height:10px"></ion-row>
+                                      </div>
+                                      <ion-row id="addArgumentRow">
+                                        <ion-item lines="none">
+                                          <ion-button (click)="onAddSlaveBotUseArgument(iSB,iSBU)">
+                                            <ion-icon slot="start" name="add-circle"></ion-icon>
+                                            <ion-label style="background-color: var(--ion-color-primary)">Ajouter</ion-label>
+                                          </ion-button>
+                                        </ion-item>
+                                      </ion-row>
+                                    </div>
+                                  </ion-card-content>
+                                </ion-card>
+                                <ion-row id="deleteFunctionRow">
+                                  <ion-item color="light" lines="none">
+                                    <ion-button (click)="onDeleteSlaveBotUse(iSB, iSBU)">
+                                      <ion-icon slot="start" name="remove-circle"></ion-icon>
+                                      <ion-label style="background-color: var(--ion-color-primary)">Supprimer</ion-label>
+                                    </ion-button>
+                                  </ion-item>
+                                </ion-row>
+                              </ion-card-content>
+                            </ion-card>
+                          </div>
+                        </div>
+                        <ion-row id="addFunctionRow">
+                          <ion-item color="tertiary" lines="none" no-padding>
+                            <ion-button (click)="onAskUse()" slot="end" id="askFunctionButton" [disabled]="this.botForm.get('slaveBots')['controls'][iSB].controls.webAdress.invalid">
+                              <ion-icon slot="start" name="wifi"></ion-icon>
+                              <ion-label style="background-color: var(--ion-color-primary)">Demander au robot</ion-label>
+                            </ion-button>
+                          </ion-item>
+                          <ion-item color="tertiary" lines="none" no-padding>
+                            <ion-button (click)="onAddSlaveBotUse(iSB)" slot="end" id="addFunctionButton">
+                              <ion-icon slot="start" name="add-circle"></ion-icon>
+                              <ion-label style="background-color: var(--ion-color-primary)">Ajouter</ion-label>
+                            </ion-button>
+                          </ion-item>
+                        </ion-row>
+                      </ion-card-content>
+                    <!-- <ion-card-content id="subUsesForm">
+                      <ion-row style="height:20px"></ion-row>
+                      <div formArrayName= "slaveBotUses" 
+                           id="slaveBotUses"
+                           class="form-group">
+                        <div *ngFor="let slaveBotUseCtrl of getSlaveBotUsesControls(iSB); let iSBU = index"
+                          [formGroupName]="iSBU">
+                          <ion-item  class="nameSlaveBot" color="light">
+                            <ion-label position="stacked" no-margin>Nom</ion-label>
+                            <ion-input type="text"
+                                       placeholder="Jardinier"
+                                       autocomplete="on" 
+                                       clear-input="true"
+                                       formControlName="name">
+                            </ion-input>
+                          </ion-item>
+                          <ion-row style="height:20px"></ion-row>
+                          <ion-item class="ipSlaveBot" color="light">
+                            <ion-label position="stacked" no-margin>Description</ion-label>
+                            <ion-input type="email"
+                                       placeholder="Prépare le cocktail de votre choix" 
+                                       autocomplete="on" 
+                                       clear-input=true 
+                                       formControlName="description">
+                            </ion-input>
+                          </ion-item>
+                          <ion-row style="height:20px"></ion-row>
+                          <ion-item class="descriptionSlaveBot" color="light">
+                            <ion-label position="stacked" no-margin>Arguments</ion-label>
+                            <ion-row style="height:10px"></ion-row>
+                            <ion-textarea placeholder="pots.  " 
+                                          autocomplete="on" 
+                                          clear-input=true 
+                                          formControlName="argument">
+                            </ion-textarea>
+                          </ion-item>
+                          <ion-row id="deleteFunctionRow">
+                            <ion-item>
+                              <ion-button (click)="onDeleteSlaveBotUse(iSB,iSBU)">
+                                <ion-icon slot="start" name="remove-circle"></ion-icon>
+                                <ion-label style="background-color: var(--ion-color-primary)">Supprimer</ion-label>
+                              </ion-button>
+                            </ion-item>
+                          </ion-row>
+                          <ion-row style="height:20px"></ion-row>
+                        </div>
+                       </div> 
+                      <ion-row id="addFunctionRow">
+                        <ion-item color="tertiary" lines="none" no-padding>
+                          <ion-button (click)="onAskUse()" slot="end" id="askFunctionButton" [disabled]="this.botForm.controls['slaveBots'].at(iSB).get('webAdress').invalid">
+                          <ion-icon slot="start" name="wifi"></ion-icon>
+                          <ion-label style="background-color: var(--ion-color-primary)">Demander au robot</ion-label>
+                          </ion-button>
+                        </ion-item>
+                        <ion-item color="tertiary" lines="none" no-padding>
+                          <ion-button (click)="onAddSlaveBotUse(iSB)" slot="end" id="addFunctionButton">
+                            <ion-icon slot="start" name="add-circle"></ion-icon>
+                            <ion-label style="background-color: var(--ion-color-primary)">Ajouter</ion-label>
+                          </ion-button>
+                        </ion-item>
+                      </ion-row> 
+                    
+                    </ion-card-content> -->
+                  </ion-card>
+                  <ion-row id="deleteSlaveBotRow">
+                    <ion-item color="light" lines="none">
+                      <ion-button (click)="onDeleteSlaveBot(iSB)">
+                        <ion-icon slot="start" name="remove-circle"></ion-icon>
+                        <ion-label style="background-color: var(--ion-color-primary)">Supprimer</ion-label>
+                      </ion-button>
+                    </ion-item>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card> 
+            </div>
+          </div>
+          <ion-row id="addFunctionRow">
+            <ion-item color="tertiary" lines="none" no-padding>
+              <ion-button (click)="onAddSlaveBot()" slot="end" id="addFunctionButton">
+                <ion-icon slot="start" name="add-circle"></ion-icon>
+                <ion-label style="background-color: var(--ion-color-primary)">Ajouter</ion-label>
+              </ion-button>
+            </ion-item>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-row style="height:20px"></ion-row>
+      <ion-row id="formButton">
+       <!--  [disabled]="this.botForm.invalid" -->
+        <ion-button type="submit" color="primary" (click)="onNewBot()">OK</ion-button>
+        <ion-button type="submit" color="warning">CANCEL</ion-button>
+      </ion-row>
+    </form>
+  </ion-card-content>
+</ion-card>
+<p>
+  {{botForm.value | json}}
+</p>
+</ion-content>

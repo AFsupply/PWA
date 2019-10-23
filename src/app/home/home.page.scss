@@ -1,0 +1,36 @@
+/* ion-header {
+    height: 50px !important;
+    vertical-align: center !important;
+} */
+
+/* ion-title {
+    vertical-align: center !important;
+    height: 100%;
+    background-color: #003a00e3;
+    color: white;
+} */
+
+ion-content {
+    --ion-background-color: var(--ion-color-secondary);
+}
+
+/* ion-footer {
+    height: 50px !important;
+    vertical-align: center !important;
+    background-color: #003a00e3;
+}
+
+ion-button {
+
+}  */
+
+ion-grid {
+    height: 45px;
+}
+
+ion-col{
+    ion-button {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+}

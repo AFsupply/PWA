@@ -1,0 +1,54 @@
+<ion-grid fixed *ngIf="hide == false">
+  <ion-row>
+    <ion-col size="12"  *ngFor="let bot of loadedBots; let i = index">
+      <ion-card no-margin [routerLink]="['/bot-board' , bot.id]" routerLinkActive="router-link-active" > 
+        <!-- (click)="nav(vegetable.id)" -->
+        <ion-card-header no-padding>
+          <ion-row class= "headerRow">
+            <ion-col size="6" class="custAvatar">
+                <ion-item no-padding color="light" lines="none" text-center>
+                    <ion-avatar slot="start">
+                      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                    </ion-avatar>
+                    <ion-card-title>{{bot.name}}</ion-card-title>
+                  </ion-item>
+                
+            </ion-col>
+            <ion-col offset="5" size="1" no-padding>
+              <ion-button fill="clear" no-padding>
+                  <ion-icon id="detail"  size="large" name="arrow-dropright" slot="icon-only" no-padding ></ion-icon> 
+                </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+        <ion-card-content no-margin no-padding>
+          <ion-row>
+            <ion-card-subtitle>Fonction(s):</ion-card-subtitle>
+          </ion-row>
+          <ion-row align-items-center *ngFor='let use of bot.uses | keyvalue; let ii=index'>
+            <ion-col size="4" text-center>
+              <ion-item no-padding color="tertiary" lines="none">
+                <ion-label no-margin>
+                  <ion-icon name="key"></ion-icon>
+                  {{use.value.name}}
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="8" text-center>
+              <ion-item no-padding color="tertiary" lines="none" text-center>
+                <ion-label no-margin>
+                  <ion-icon name="repeat"></ion-icon>
+                  {{use.value.argument}}
+                </ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+             
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-button (click)="showBot()">show</ion-button>
+  </ion-row>
+</ion-grid>

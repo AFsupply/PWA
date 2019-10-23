@@ -1,0 +1,44 @@
+ ion-item.emailSignin{
+    padding-top: 16px;
+}
+
+ion-button {
+  padding-right: 20px;
+}
+
+ion-label{
+  background-color: var(--ion-color-tertiary);
+  border-radius: 10px;
+}
+
+ion-card-subtitle {
+  color: black;
+}
+/*
+ion-item.passwordSignup{
+    --border-radius:30px !important;
+    --ion-background-color: #58575600 !important;
+}
+
+ion-item.space{
+  --ion-background-color:  #58575600 !important;
+  --width:40%;
+}
+
+ion-input {
+  background-color: white;
+  border-radius : 10px;
+} */
+
+ion-card-content {
+  background-color: var(--ion-color-tertiary);
+}
+
+ion-card-header {
+  ion-card-title {
+    color: white !important;
+  }
+  ion-card-subtitle {
+    color: white !important;
+  }
+}

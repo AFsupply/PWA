@@ -1,0 +1,28 @@
+ion-header {
+    height: 45px;  
+}
+
+ion-footer {
+    height: 45px;
+    background-color: var(--ion-color-primary);
+}
+
+ion-menu{
+    --width: 300px;
+}
+
+ion-icon {
+    margin-right: 10px !important;
+}
+
+ion-menu {
+    ion-list {
+    --ion-background-color: "secondary";
+    }
+}
+
+ion-item{
+    display: inline-block !important;
+    text-align: center !important;
+    align-items: center !important;
+}
